@@ -1,0 +1,10 @@
+# Called when the camera looks at the tray. Returns the 3D poses 
+
+# Request
+
+---
+# Result
+o2ac_msgs/Estimated3DPoses[] results
+
+---
+# Feedback

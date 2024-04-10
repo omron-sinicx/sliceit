@@ -1,0 +1,14 @@
+material Vegetable/cucumber
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture cucumber.png
+			}
+		}
+	}
+}
+

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<launch>
+  <arg name="limited" default="false"/>
+  <arg name="paused" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="world_name" default="$(find o2ac_gazebo)/worlds/basic.world" />
+  <arg name="ft_filter" default="true" />
+  <!-- Gazebo needs to start up paused in order for us to be able to set the initial joint configurations.
+       This is a known bug as of July 2018. -->
+
+  <param name="use_gazebo_sim" type="bool" value="true" />
+
+  <env name="GAZEBO_MODEL_PATH"
+       value="$(find o2ac_parts_description):$(find o2ac_scene_description):$(find o2ac_gazebo)/models:$(optenv GAZEBO_MODEL_PATH)" />
+
+  <!-- startup simulated world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(arg world_name)"/>
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <!-- <arg name="verbose" value="true"/> -->
+  </include>
+
+  <!-- send robot urdf to param server -->
+  <!-- In this case the "robot" is the ensemble of the 2 arms -->
+  <include file="$(find o2ac_scene_description)/launch/b_bot_scene_upload.launch">
+    <arg name="gazebo" value="true"/>
+  </include>
+
+  <!-- push robot_description to factory and spawn robot in gazebo -->
+  <!-- Initial pose modified on 9 July 2018 -->
+  <!-- Do not change this without updating the home pose in o2ac_base_scene.srdf accordingly. -->
+  <node name="spawn_gazebo_model" pkg="gazebo_ros" type="spawn_model"
+        args="-urdf -param robot_description -model o2ac_bots
+        -J b_bot_elbow_joint 1.4      -J b_bot_shoulder_lift_joint -2.1  -J b_bot_shoulder_pan_joint 1.57
+        -J b_bot_wrist_1_joint -0.85  -J b_bot_wrist_2_joint -1.57       -J b_bot_wrist_3_joint 0
+        -unpause" respawn="false" output="screen" />
+  <include file="$(find o2ac_gazebo)/launch/controller_utils.launch"/>
+
+  <remap from="/b_bot/cartesian_compliance_controller/ft_sensor_wrench" to="/b_bot/wrench/filtered"/>
+
+  <!-- spawn controllers -->
+  <rosparam file="$(find o2ac_gazebo)/controller/2_bot_controllers.yaml" command="load"/>
+  <node name="controller_spawner" 
+        pkg="controller_manager"
+        type="spawner"
+        args="b_bot/scaled_pos_joint_traj_controller b_bot/gripper_controller"
+        respawn="false" 
+        output="screen"/>
+
+  <!-- load other controller -->
+  <node name="ros_control_stopped_spawner" pkg="controller_manager" type="spawner" respawn="false"
+        output="screen" args="--stopped b_bot/cartesian_compliance_controller"/>
+
+  <group if="$(arg ft_filter)">
+      <node name="b_bot_ft_filter"
+            pkg="ur_control" type="ft_filter.py" args="-z -t wrench -ns b_bot"
+            output="screen"/>
+  </group>
+
+   <include file="$(find ur3_gazebo)/launch/gazebo_to_tf.launch"/>
+</launch>

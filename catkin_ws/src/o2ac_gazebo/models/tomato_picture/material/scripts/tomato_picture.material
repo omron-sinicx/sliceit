@@ -1,0 +1,14 @@
+material Vegetable/tomato
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{							
+				texture vegetable-tomato.png
+			}
+		}
+	}
+}
+

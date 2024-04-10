@@ -1,0 +1,27 @@
+[submodule "github-wiki"]
+	path = github-wiki
+	url = https://github.com/o2ac/o2ac-ur.wiki.git
+[submodule "underlay_ws/src/moveit"]
+	path = underlay_ws/src/moveit
+	url = https://github.com/cambel/moveit.git
+	branch = noetic-dev
+[submodule "underlay_ws/src/moveit_msgs"]
+	path = underlay_ws/src/moveit_msgs
+	url = https://github.com/cambel/moveit_msgs
+	branch = o2ac-2022-12
+[submodule "underlay_ws/src/third_party/robotiq-cri"]
+	path = underlay_ws/src/third_party/robotiq-cri
+	url = https://github.com/cambel/robotiq.git
+	branch = o2ac-2023-01
+[submodule "underlay_ws/src/ur_python_utilities"]
+	path = underlay_ws/src/ur_python_utilities
+	url = https://github.com/omron-sinicx/ur_python_utilities.git
+	branch = o2ac-noetic
+[submodule "underlay_ws/src/cartesian_controllers"]
+	path = underlay_ws/src/cartesian_controllers
+	url = https://github.com/cambel/cartesian_controllers.git
+	branch = master
+[submodule "disect"]
+    path = disect
+	url = git@github.com:cambel/DiSECt.git
+	branch = dev

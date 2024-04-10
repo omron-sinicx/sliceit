@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="robot" doc="Whether it is a_bot or b_bot"/>
+
+  <!-- Publish a IMU message with the gravity vector on the robot's base link frame -->
+  <node name="fake_imu" pkg="ur_control" type="imu.py" args="-ns $(arg robot)" output="screen"/>
+
+  <node name="ft_calib" pkg="force_torque_sensor_calib" type="ft_calib_node" cwd="node" respawn="false" output="screen" >
+    <rosparam command="load" file="$(find o2ac_scene_description)/config/$(arg robot)_ft_calib_config.yaml"/>
+    <remap from="/ft_calib/ft_raw" to="/$(arg robot)/wrench"/>
+    <remap from="/ft_calib/imu" to="/$(arg robot)/imu" />
+  </node>
+</launch>

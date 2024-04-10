@@ -1,0 +1,60 @@
+# main loop frequency [Hz] (should be as fast as F/T sensor publish frequency)
+loop_rate: 500.0
+
+# waiting time after moving to each pose before taking F/T measurements
+wait_time: 3.0
+
+# Name of the moveit group
+moveit_group_name: 'b_bot'
+
+# Name of the calib file
+calib_file_name: 'b_ft_cal.yaml'
+
+# Name of the directory
+calib_file_dir: '/root/o2ac-ur/catkin_ws/src/o2ac_scene_description/config'
+
+# Name of file to store measurements
+meas_file_name: 'b_ft_calib_meas.txt'
+
+# Name of the directory
+meas_file_dir: '/root/o2ac-ur/catkin_ws/src/o2ac_scene_description/config'
+
+# don't execute random poses
+random_poses: false
+
+# number of random poses
+number_random_poses: 0
+
+# the poses to which to move the arm in order to calibrate the F/T sensor
+# format: [x y z r p y]  in meters, radians
+# poses_frame_id sets the frame at which the poses are expressed
+poses_frame_id: 'b_bot_base_link'
+
+pose0: [-0.13042, 0.18239, 0.39118, 0.0, 1.5707, 1.5707]
+pose1: [-0.12963, 0.35757, 0.71313, 0.0, 0.0, 1.5707]
+pose2: [-0.40146, 0.10459, 0.7125, 0.0, 0.0, 3.1415]
+pose3: [-0.15057, -0.16683, 0.72903, 0.0, 0.0, -1.5707]
+pose4: [-0.40146, 0.10459, 0.7125, 0.0, 0.0, 3.1415]
+pose5: [-0.12963, 0.35757, 0.71313, 0.0, 0.0, 1.5707]
+pose6: [-0.13042, 0.18239, 0.39118, 0.0, 1.5707, 1.5707]
+pose7: [-0.13042, 0.18239, 0.39118, 0.0, 1.0707, 1.5707]
+pose8: [-0.13048, 0.18073, 0.39118, 0.0, 2.0707, 1.5707]
+pose9: [-0.13042, 0.18239, 0.39118, 0.0, 1.0707, 1.0707]
+pose10: [-0.13048, 0.18073, 0.39118, 0.0, 2.0707, 1.0707]
+pose11: [-0.13042, 0.18239, 0.39118, 0.0, 1.5707, 0.7853]
+pose12: [-0.13042, 0.18239, 0.39118, 0.0, 1.0707, 0.7853]
+pose13: [-0.13042, 0.18239, 0.39118, 0.0, 1.8707, 0.7853]
+pose14: [-0.13042, 0.18239, 0.39118, 0.0, 1.5707, 0.0]
+pose15: [-0.13042, 0.18239, 0.39118, 0.0, 1.0707, 0.0]
+pose16: [-0.13042, 0.18239, 0.39118, 0.0, 1.6707, 0.0]
+pose17: [-0.13042, 0.18239, 0.39118, 0.0, 1.5707, 1.5707]
+pose18: [-0.13048, 0.18073, 0.39118, 0.0, 2.0707, 2.0707]
+pose19: [-0.13042, 0.18239, 0.39118, 0.0, 1.5707, 2.3561]
+pose20: [-0.13042, 0.18239, 0.39118, 0.0, 1.8707, 2.3561]
+pose21: [-0.13042, 0.18239, 0.39118, 0.0, 1.5707, 3.1415]
+pose22: [-0.13042, 0.18239, 0.39118, 0.0, 1.0707, 3.1415]
+pose23: [-0.13042, 0.18239, 0.39118, 0.0, 1.5707, 1.5707]
+pose24: [-0.12963, 0.35757, 0.71313, 0.0, 0.0, 1.5707]
+pose25: [-0.40146, 0.10459, 0.7125, 0.0, 0.0, 3.1415]
+pose26: [-0.15057, -0.16683, 0.72903, 0.0, 0.0, -1.5707]
+

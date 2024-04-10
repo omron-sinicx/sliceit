@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+
+<!-- This macro adds a convenient TF frame at the tip of the closed gripper. -->
+<!-- The position of the TF frame has not been measured at all and needs to be calibrated. -->
+
+<robot name="robotiq_85_gripper_o2ac" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+  <xacro:macro name="o2ac_end_effector" params="prefix use_soft_wrist:=false use_cameras:=false parent">
+    <xacro:include filename="$(find robotiq_description)/urdf/robotiq_85_gripper.urdf.xacro"/>
+    
+    <xacro:robotiq_85_gripper prefix="${prefix}" parent="${parent}">
+        <origin rpy="0.0 0.0 0.0" xyz="0.01 0 0"/> <!-- This 0.01 offset is the Robotiq/UR coupling -->
+    </xacro:robotiq_85_gripper>
+
+    <link name="${prefix}coupling">
+      <visual>
+        <origin rpy="0 ${pi/2} 0" xyz=".005 0 0"/>
+        <geometry>
+          <cylinder length="0.01" radius="0.0375"/>
+        </geometry>
+        <material name="black">
+        <color rgba=".1 .1 .1 1"/>
+      </material>
+      </visual>
+      <collision>
+        <origin rpy="0 ${pi/2} 0" xyz=".005 0 0"/>
+        <geometry>
+          <cylinder length="0.01" radius="0.0375"/>
+        </geometry>
+      </collision>
+    </link>
+    <joint name="${prefix}coupling_joint" type="fixed">
+      <parent link="${parent}" />
+      <child link = "${prefix}coupling" />
+      <origin rpy="0 0 0" xyz="0 0 0"/>
+    </joint>
+
+    <xacro:if value="${use_cameras}">
+      <xacro:include filename="$(find o2ac_scene_description)/urdf/components/wrist_cameras.xacro" />
+      <xacro:wrist_cameras prefix="${prefix}" parent="${prefix}robotiq_85_base_link"/>
+    </xacro:if>
+
+    <!-- Add an additional link to plan with. Oriented like the UR ee_link frame. -->
+    <joint name="${prefix}gripper_tip_link_joint" type="fixed">
+      <parent link="${prefix}robotiq_85_base_link"/>
+      <child link="${prefix}gripper_tip_link"/>
+      <origin rpy="0 0 0" xyz=".163 0 0"/>
+    </joint>
+    <link name="${prefix}gripper_tip_link"/>
+
+    <!-- ========= -->
+    <!-- Add screw tool tip frames. X-axis points along the screw into the hole. -->
+    
+    <!-- Offset of the gripper tooltips -->
+
+    <joint name="${prefix}knife_handle_joint" type="fixed">
+      <parent link="${prefix}gripper_tip_link"/>
+      <child link="${prefix}knife_handle"/>
+      <origin rpy="0 0 0" xyz="-0.018 0.0 0.058"/>
+    </joint>
+    <link name="${prefix}knife_handle"/>
+
+    <joint name="${prefix}knife_tip_joint" type="fixed">
+      <parent link="${prefix}knife_handle"/>
+      <child link="${prefix}knife_tip"/>
+      <origin rpy="0 0 0" xyz="0.04 0.00 0.16"/>
+    </joint>
+    <link name="${prefix}knife_tip"/>
+
+    <joint name="${prefix}knife_center_joint" type="fixed">
+      <parent link="${prefix}gripper_tip_link"/>
+      <child link="${prefix}knife_center"/>
+      <origin rpy="0 0 0" xyz="0.025 0.0 0.13"/>
+    </joint>
+    <link name="${prefix}knife_center"/>
+
+    <!-- Cutting simulation frame of reference -->
+    <joint name="${prefix}knife_sim_joint" type="fixed">
+      <parent link="${prefix}gripper_tip_link"/>
+      <child link="${prefix}knife_sim"/>
+      <origin rpy="0 0 ${pi/2}" xyz="0.025 0.0 0.13"/>
+    </joint>
+    <link name="${prefix}knife_sim"/>
+
+  </xacro:macro>
+</robot>

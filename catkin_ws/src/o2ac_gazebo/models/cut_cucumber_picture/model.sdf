@@ -1,0 +1,32 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <model name="cut_cucumber">
+    <static>1</static>
+    <link name="marker">
+      <pose>0.0 0.0 0.0 0 0 0</pose>
+      <gravity>false</gravity>
+      <visual name="visual">
+        <geometry>
+          <box>
+            <size>0.20 0.20 0.001</size>
+            <!-- SIZE OF THE MARKER + MARGIN -->
+          </box>
+        </geometry>
+        <material>
+          <script>
+	        <uri>file:///root/o2ac-ur/catkin_ws/src/o2ac_gazebo/models/cut_cucumber_picture/material/scripts</uri>
+	        <uri>file:///root/o2ac-ur/catkin_ws/src/o2ac_gazebo/models/cut_cucumber_picture/material/textures</uri>
+            <name>Vegetable/cut_cucumber</name>
+          </script>
+        </material>
+      </visual>
+      <!-- <collision name="collision">
+        <geometry>
+          <box>
+            <size>0.09 0.09 0.02</size>
+          </box>
+        </geometry>
+      </collision> -->
+    </link>
+  </model>
+</sdf>

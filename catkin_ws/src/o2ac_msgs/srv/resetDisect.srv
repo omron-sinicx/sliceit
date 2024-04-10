@@ -1,0 +1,5 @@
+bool new_sim
+bool viz
+---
+bool success
+string success_info
