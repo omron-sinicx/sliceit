@@ -2,7 +2,10 @@
 
 A real2sim2real approach to learning robotic food slicing tasks with rigid robot manipulators.
 
-Checkout our [paper](https://arxiv.org/abs/2404.02569) and our [project page](https://omron-sinicx.github.io/sliceit/).
+Checkout:
+- [Paper](https://arxiv.org/abs/2404.02569)
+- [Project page](https://omron-sinicx.github.io/sliceit/)
+- [Video](https://youtu.be/jMYMt-SIYZM)
 
 ## Installation
 
