@@ -80,7 +80,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     python3-numpy \
     python3-pip \
     python3-setuptools \
-    python3-scipy \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Pin pip version to make build more deterministic
@@ -300,7 +299,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Deep Learning
 RUN pip3 install torch
-RUN pip3 install --upgrade scipy
+RUN pip3 install scipy
 
 ###############################################################################
 
