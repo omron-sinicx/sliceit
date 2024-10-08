@@ -1,10 +1,10 @@
-# The docker-compose file for a container running on a single development machine
+# The docker compose file for a container running on a single development machine
 version: "2.4"
 
 ################################################################################
 
 services:
-  o2ac-disect:
+  osx-sliceit:
     hostname: o2ac-ur
     runtime: ${DOCKER_RUNTIME}
     privileged: true
@@ -24,7 +24,7 @@ services:
       # ROS parameters
       - ROS_HOSTNAME=o2ac-ur
       - ROS_MASTER_URI=http://o2ac-ur:11311
-    image: registry.gitlab.com/sinicx/robotics/on-going/cooking_environment:disect
+    image: sliceit
     build:
       context: ../
       dockerfile: ./docker/o2ac-dev/Dockerfile

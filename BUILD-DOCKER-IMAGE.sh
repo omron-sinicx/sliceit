@@ -16,7 +16,7 @@ DOCKER_PROJECT=$1
 if [ -z "${DOCKER_PROJECT}" ]; then
   DOCKER_PROJECT=${USER}
 fi
-DOCKER_CONTAINER="${DOCKER_PROJECT}-o2ac-disect-1"
+DOCKER_CONTAINER="${DOCKER_PROJECT}-osx-sliceit-1"
 echo "$0: DOCKER_PROJECT=${DOCKER_PROJECT}"
 echo "$0: DOCKER_CONTAINER=${DOCKER_CONTAINER}"
 
@@ -43,13 +43,13 @@ echo "Login to registry.gitlab.com... Enter your username and password:"
 # If the script runs in CI mode, image builds directly.
 # Otherwise try to pull it from the server. If this fails, it has to be build locally.
 # if [[ "$DOCKER_PROJECT" == "gitlab-ci" ]]; then
-#   docker-compose -p ${DOCKER_PROJECT} -f ./docker/docker-compose.yml build
+#   docker compose -p ${DOCKER_PROJECT} -f ./docker/docker-compose.yml build
 # else
 #   # regular developer use case
-#   docker-compose -p ${DOCKER_PROJECT} -f ./docker/docker-compose.yml pull
+#   docker compose -p ${DOCKER_PROJECT} -f ./docker/docker-compose.yml pull
 #   if [[ "$?" -ne "0" ]]; then
-#     docker-compose -p ${DOCKER_PROJECT} -f ./docker/docker-compose.yml build
+#     docker compose -p ${DOCKER_PROJECT} -f ./docker/docker-compose.yml build
 #   fi
 # fi
 
-docker-compose -p ${DOCKER_PROJECT} -f ./docker/docker-compose.yml build
+docker compose -p ${DOCKER_PROJECT} -f ./docker/docker-compose.yml build

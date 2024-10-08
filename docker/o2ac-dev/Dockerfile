@@ -10,7 +10,7 @@
 # https://github.com/NVIDIA/libglvnd
 
 # Pull official parent image from Nvidia repository.
-FROM nvidia/cuda:11.5.1-cudnn8-devel-ubuntu20.04
+FROM nvidia/cuda:11.8.0-devel-ubuntu20.04
 
 # Avoid user interaction during install of tzdata
 # https://askubuntu.com/questions/909277/avoiding-user-interaction-with-tzdata-when-installing-certbot-in-a-docker-contai
