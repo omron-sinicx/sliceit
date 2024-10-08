@@ -3,11 +3,11 @@
 	url = https://github.com/o2ac/o2ac-ur.wiki.git
 [submodule "underlay_ws/src/moveit"]
 	path = underlay_ws/src/moveit
-	url = https://github.com/cambel/moveit.git
-	branch = noetic-dev
+	url = https://github.com/omron-sinicx/moveit.git
+	branch = osx-2024-01
 [submodule "underlay_ws/src/moveit_msgs"]
 	path = underlay_ws/src/moveit_msgs
-	url = https://github.com/cambel/moveit_msgs
+	url = https://github.com/omron-sinicx/moveit_msgs
 	branch = o2ac-2022-12
 [submodule "underlay_ws/src/third_party/robotiq-cri"]
 	path = underlay_ws/src/third_party/robotiq-cri
