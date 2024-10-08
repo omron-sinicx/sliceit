@@ -84,7 +84,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 	&& rm -rf /var/lib/apt/lists/*
 
 # Pin pip version to make build more deterministic
-RUN pip3 install --upgrade pip 4
+RUN pip3 install --upgrade pip
 
 ################################################################################
 
@@ -186,7 +186,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     ros-noetic-dynamixel-workbench-msgs \
 	&& rm -rf /var/lib/apt/lists/*
 
-RUN pip3 install pyserial 4
+RUN pip3 install pyserial
 
 ################################################################################
 
@@ -240,17 +240,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libxtst6 \
 	&& rm -rf /var/lib/apt/lists/*
-
-# Install additional recommended VS Code extensions.
-# https://code.visualstudio.com/docs/editor/extension-gallery#_command-line-extension-management
-RUN code --install-extension ms-python.python --user-data-dir \
-	&& code --install-extension ms-vscode.cpptools --user-data-dir \
-	&& code --install-extension ms-azuretools.vscode-docker --user-data-dir \
-	&& code --install-extension streetsidesoftware.code-spell-checker --user-data-dir \
-	&& code --install-extension eamodio.gitlens --user-data-dir \
-	&& code --install-extension mhutchie.git-graph --user-data-dir \
-	&& code --install-extension ms-iot.vscode-ros --user-data-dir \
-	&& code --install-extension ajshort.msg --user-data-dir /
 
 # Install Python linter as recommended by Python extension.
 RUN /usr/bin/python3 -m pip install -U \
@@ -326,8 +315,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 # Required for opencv-python.  https://stackoverflow.com/questions/63448467/installing-opencv-fails-because-it-cannot-find-skbuild
 
-RUN pip3 install open3d==0.12.0 sklearn
-RUN pip3 install opencv-python==4.5.1.48
+RUN pip3 install scikit-learn
+RUN pip3 install open3d opencv-python==4.5.1.48 --ignore-installed PyYAML
 
 ################################################################################
 
@@ -388,7 +377,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 RUN echo 'export PATH=/usr/lib/ccache:$PATH' >> $HOME/.bashrc
 
 RUN apt-key adv --fetch-keys http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/3bf863cc.pub
-RUN apt update && apt install udev
+RUN apt update && apt install udev -y --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 ################################################################################
 
